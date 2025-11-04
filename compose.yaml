@@ -1,0 +1,15 @@
+services:
+  qbittorrent-watcher:
+    image: git.hamster-glyptodon.ts.net/noers/audiobook-watcher:latest
+    container_name: qbittorrent-watcher
+    environment:
+      QBITTORRENT_URL: ${QBITTORRENT_URL}
+      QBITTORRENT_USERNAME: ${QBITTORRENT_USERNAME}
+      QBITTORRENT_PASSWORD: ${QBITTORRENT_PASSWORD}
+      CHECK_INTERVAL: "300"
+      TAG_DEST_MAP: ${TAG_DEST_MAP}
+    volumes:
+      - ${DOWNLOAD_FOLDER}:/downloads:ro
+      - ${DEST_FOLDER}:/output
+      - ${DATA_FOLDER}:/data
+    restart: unless-stopped
